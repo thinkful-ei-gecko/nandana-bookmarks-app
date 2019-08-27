@@ -1,5 +1,46 @@
 * {
   box-sizing: border-box;
 }
+h1{
+  text-align: center;
+}
+.addBookmark{
+  display:flex;
+  padding-left: 0;
+  margin-bottom: 20px;
+  border: 1px solid grey;
+  padding: 20px
+}
+.bookmark-list{
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+    border: 1px solid grey;
+    padding: 20px
+}
+li{
+  display: inline;
+}
 
 
+
+.error-content {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  border: 2px solid red;
+  background-color: lightsalmon;
+}
+
+.error-content p {
+  margin-top: 1px;
+  padding: 7px;
+}
+
+.error-content button {
+  font-size: 6pt;
+  background-color: red;
+  color: white;
+  position: relative;
+  left: 80%;
+}

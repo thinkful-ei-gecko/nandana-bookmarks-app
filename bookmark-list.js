@@ -16,34 +16,35 @@ const bookmarkList = (function(){
   function generateItemElement(item) {
     if(item.expanded === true) {
       return `
-      <li class="js-item-title" id="${item.id}">
+      <ul class="bookmark-list"><li class="js-item-title" id="${item.id}">
         ${item.title}</li>
         <li class="js-item-desc" data-item-id="${item.id}">
         ${item.description}</li>
         <li class="js-item-rating" data-item-id="${item.id}">
         ${item.rating}</li>
         <li class="js-item-visitlink" data-item-id="${item.id}">
-        <span> <a href="${item.url}" />Visit Link</span>
+        <a href="${item.url}" target="_blank".>Visit Link</a>
         </li>
-        <button class="js-delete" id=${item.id}>Delete</button>
+        <button class="js-delete" type="submit" id=${item.id}>Delete</button></ul>
       `;
     }
     else {
-      return `
+      return `<ul class="bookmark-list">
         <li class="js-item-title" id="${item.id}">
         ${item.title}</li>
         <li class="js-item-rating" data-item-id="${item.id}">
-        ${item.rating}</li>
+        ${item.rating}</li></ul>
         `;
     }
   }
   
   
-  function generateShoppingItemsString(shoppingList) {
-    const items = shoppingList.map((item) => generateItemElement(item));
+  function generateBookmarkItemsString(bookmarkList) {
+    const items = bookmarkList.map((item) => generateItemElement(item));
     return items.join('');
   }
-  
+
+
   function renderError() {
     if (store.error) {
       const el = generateError(store.error);
@@ -55,20 +56,33 @@ const bookmarkList = (function(){
   
   function render() {
     renderError();
-
-    // Filter item list if store prop is true by item.checked === false
-    let items = store.bookmarkList;
+    
+    let items = [ ...store.bookmarkList ];
+    let ratingOption = Number($('.filter-by-rating-option:selected').val());
+    if(ratingOption>=1){
+      let fliteredRatingList = items.filter(item=>item.rating>=ratingOption);
+      console.log(items);
+      console.log(fliteredRatingList);
+      const bookmarkListItemsString = generateBookmarkItemsString(fliteredRatingList);
+      $('.bookmarks-list').html(bookmarkListItemsString);
+    }
+    else{
+      const bookmarkListItemsString = generateBookmarkItemsString(store.bookmarkList);
+      $('.bookmarks-list').html(bookmarkListItemsString);
+    }
 
   
     // render the shopping list in the DOM
     console.log('render ran');
-    const shoppingListItemsString = generateShoppingItemsString(items);
+    //const shoppingListItemsString = generateShoppingItemsString(items);
   
     // insert that HTML into the DOM
-    $('.bookmarks-list').html(shoppingListItemsString);
-    handleExpandBookmark();
-    handleDeleteItemClicked();
+    //$('.bookmarks-list').html(shoppingListItemsString);
+    //handleExpandBookmark();
+    //handleDeleteItemClicked();
+    
   }
+
   
   function handleAddBookmark(){
     $('.addBookmark-button').on('click',function(event){
@@ -83,29 +97,30 @@ const bookmarkList = (function(){
       <input type="text" name="add-url" class="js-url" placeholder="Url (required)" required>
       <label for="add-description">Description</label>
       <textarea type="text" name="add-description" class="js-description" placeholder="description (optional) rows="4" cols="50">textarea</textarea>
-      <input class="js-rating" type="radio" name="rating" value="5 star"> 5 Stars<br>
-      <input class="js-rating" type="radio" name="rating" value="4 Star"> 4 Stars<br>
-      <input class="js-rating" type="radio" name="rating" value="3 Star"> 3 Stars<br>
-      <input class="js-rating" type="radio" name="rating" value="2 Star"> 2 Stars<br>
-      <input class="js-rating" type="radio" name="rating" value="1 Star"> 1 Star
+      <input class="js-rating" type="radio" name="rating" value="5" > 5 Stars<br>
+      <input class="js-rating" type="radio" name="rating" value="4"> 4 Stars<br>
+      <input class="js-rating" type="radio" name="rating" value="3" > 3 Stars<br>
+      <input class="js-rating" type="radio" name="rating" value="2"> 2 Stars<br>
+      <input class="js-rating" type="radio" name="rating" value="1"> 1 Star<br>
+    
       <button class="save" type="submit">SAVE</button>
       </form>`);
-      handleSaveBookmark();
+      //handleSaveBookmark();
       
     });
   }
   
   function handleSaveBookmark() {
-    $('#addBookmark-form').submit(function(event){
+    $('.addBookmark').on('submit','#addBookmark-form',function(event){
       event.preventDefault();
       console.log('saving bookmark called');
       let newObj = {
         title: $(event.currentTarget).find('.js-add-bookmark-title').val(),
         url:   $(event.currentTarget).find('.js-url').val(),
         description:  $(event.currentTarget).find('.js-description').val(),
-        rating: $(event.currentTarget).find('.js-rating').val()
+        rating: $(event.currentTarget).find('.js-rating:checked').val()
       };  
-     
+      console.log(newObj.rating);
       api.createBookmark(newObj)
         .then((obj) => {
           store.addBookmark(obj);
@@ -128,7 +143,7 @@ const bookmarkList = (function(){
   }
   
   function handleExpandBookmark() {
-    $('.js-item-title').on('click', event => {
+    $('.bookmarks-result').on('click','.js-item-title', event => {
       const id = event.currentTarget.id;
       const item = store.findById(id);
       item.expanded = !item.expanded;
@@ -137,8 +152,8 @@ const bookmarkList = (function(){
   }
   
   function handleDeleteItemClicked() {
-    $('.js-delete').on('click', event => {
-      console.log("inside handle delete");
+    $('.bookmarks-result').on('click','.js-delete', event => {
+      console.log('inside handle delete');
       const id = event.currentTarget.id;
 
       api.deleteItem(id)
@@ -206,9 +221,10 @@ const bookmarkList = (function(){
   
   function bindEventListeners() {
     handleAddBookmark();
-    //handleSaveBookmark();
-    //handleExpandBookmark();
-    //handleDeleteItemClicked();
+    
+    handleSaveBookmark();
+    handleExpandBookmark();
+    handleDeleteItemClicked();
     handleEditShoppingItemSubmit();
     handleToggleFilterClick();
     handleShoppingListSearch();
