@@ -1,0 +1,31 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Bookmark List</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1>My Bookmarks</h1>
+    <div class="error-container"></div>
+    <div class="main">
+      <button class="addBookmark-button" type="submit">Add Bookmark</button>
+      <select>
+        <option value="Minimum Rating">Minimum Rating</option>
+        <option value="5 Star">5 Star</option>
+        <option value="4 Star">4 Star</option>
+        <option value="3 Star">3 Star</option>
+        <option value="2 Star">2 Star</option>
+        <option value="1 Star">1 Star</option>
+      </select>
+    </div>
+    <div class="addBookmark"></div>
+      
+      <div class="bookmarks-result"><ul class="bookmarks-list"></ul></div>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="api.js"></script>
+      <script type="text/javascript" src="store.js"></script>
+      <script type="text/javascript" src="bookmark-list.js"></script>
+      <script type="text/javascript" src="index.js"></script>
+  </html>
