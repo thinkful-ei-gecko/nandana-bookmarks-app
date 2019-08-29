@@ -2,18 +2,20 @@
   <html lang="en">
   <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmark List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>My Bookmarks</h1>
+    <header><h1>My Bookmarks List</h1></header>
     <div class="error-container"></div>
-    <div class="main">
-      <button class="addBookmark-button" type="submit">Add Bookmark</button>
-      <label>Filter By rating</label>
-      <select class="filter-by-rating">
-          <option class="filter-by-rating-option" value="0"></option>
+    <div class="ratingDiv">
+      <label for="filter-by-rating">Filter by Rating</label>
+      <select name="filter-by-rating" class="filter-by-rating">
+        <option class="filter-by-rating-option" value="0">Display All</option>
         <option class="filter-by-rating-option" value="5">5 Star</option>
         <option class="filter-by-rating-option" value="4">4 Star</option>
         <option class="filter-by-rating-option" value="3">3 Star</option>
@@ -21,12 +23,15 @@
         <option class="filter-by-rating-option" value="1">1 Star</option>
       </select>
     </div>
+    <div><button class="addBookmark-button collapsible" tabindex="0" type="submit">Add Bookmark</button></div>
     <div class="addBookmark"></div>
-     <div class="bookmarks-result"></div> 
-      <div class="bookmarks-result"><ul class="bookmarks-list"></ul></div>
+      <ul class="bookmarks-list"></ul>
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="api.js"></script>
-      <script type="text/javascript" src="store.js"></script>
-      <script type="text/javascript" src="bookmark-list.js"></script>
-      <script type="text/javascript" src="index.js"></script>
+      <script type="text/javascript" src="scripts/api.js"></script>
+      <script type="text/javascript" src="scripts/store.js"></script>
+      <script type="text/javascript" src="scripts/bookmark-list.js"></script>
+      <script type="text/javascript" src="scripts/index.js"></script>
+      </body>
   </html>
+
+  

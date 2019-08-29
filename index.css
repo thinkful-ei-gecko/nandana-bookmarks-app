@@ -1,46 +1,187 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-h1{
-  text-align: center;
+
+h1,
+h2 {
+    text-align: center;
 }
-.addBookmark{
-  display:flex;
-  padding-left: 0;
-  margin-bottom: 20px;
-  border: 1px solid grey;
-  padding: 20px
+
+.ratingDiv {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
-.bookmark-list{
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 20px;
+
+.ratingDiv>select {
+    border: 2px solid grey;
+}
+
+.addBookmark {
+    display: flex;
+    justify-content: center;
+}
+
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+}
+
+.addBookmark-button {
+    display: block;
+    width: 90%;
+    height: 50px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#addBookmark-form {
+    border: 2px solid black;
+    margin: 12px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+form>label,
+input,
+textarea {
+    text-align: center;
+    width: 100%;
+}
+
+input,
+textarea {
+    text-align: center;
+    width: 100%;
+    border: 2px solid grey;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.ratingdiv {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%
+}
+
+.js-item-title:hover {
+    cursor: pointer;
+}
+
+.save,
+.cancel {
+    margin-right: 30px;
+}
+
+.bookmark-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+    align-content: center
+}
+
+ul {
+    list-style-type: none;
+    padding: 2%;
+    max-height: 400px;
+}
+
+li {
+    border: 2px solid black;
+    margin: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+    /*box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px;*/
     border: 1px solid grey;
-    padding: 20px
-}
-li{
-  display: inline;
 }
 
-
-
-.error-content {
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  border: 2px solid red;
-  background-color: lightsalmon;
+li>button {
+    border: none;
+    background-color: rgb(29, 141, 179);
 }
 
-.error-content p {
-  margin-top: 1px;
-  padding: 7px;
+.expanded {
+    /*display: flex;
+  flex-direction: column;
+  justify-content:space-around;*/
+    margin: 10px;
+    align-items: center;
 }
 
-.error-content button {
-  font-size: 6pt;
-  background-color: red;
-  color: white;
-  position: relative;
-  left: 80%;
+.expanded-div,
+.form-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.notexpanded {
+    display: flex;
+    justify-content: space-between;
+}
+
+.js-item-title {
+    text-decoration: underline;
+}
+
+.js-delete {
+    border: 1px grey;
+    color: black;
+    padding-top: 2px
+}
+
+@media screen and (min-width: 668px) and (max-width: 1024px) {
+    ul {
+        max-height: 550px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    h1 {
+        padding-left: 2%;
+        text-align: left;
+        display: inline-block;
+    }
+    .ratingDiv {
+        justify-content: flex-end;
+    }
+    .ratingDiv>* {
+        margin-left: 5px;
+    }
+    #display-form {
+        width: 60%;
+    }
+    .addBookmark-button {
+        width: 40%;
+    }
+    #addBookmark-form {
+        width: 40%;
+        margin: 0 auto;
+    }
+    ul {
+        width: 60%;
+        margin: auto;
+    }
 }
